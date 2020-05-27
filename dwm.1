@@ -1,6 +1,6 @@
 .TH DWM 1 dwm\-VERSION
 .SH NAME
-dwm \- dynamic window manager
+dwm \- dynamic window manager - Tom's version
 .SH SYNOPSIS
 .B dwm
 .RB [ \-v ]
@@ -33,14 +33,22 @@ dwm draws a small border around windows to indicate the focus state.
 .SH OPTIONS
 .TP
 .B \-v
-prints version information to stderr, then exits.
+prints version information to standard output, then exits.
+
 .SH USAGE
 .SS Status bar
 .TP
 .B X root window name
 is read and displayed in the status text area. It can be set with the
 .BR xsetroot (1)
-command.
+command :
+.PP
+.nf
+.RS
+    xsetroot -name $(date)
+.RE
+.fi
+.PP
 .TP
 .B Button1
 click on a tag label to display all windows with that tag, click on the layout
@@ -56,13 +64,13 @@ click on a tag label applies that tag to the focused window.
 click on a tag label adds/removes that tag to/from the focused window.
 .SS Keyboard commands
 .TP
-.B Mod1\-Shift\-Return
+.B Mod1\-Return
 Start
-.BR st(1).
+.BR urxvtc(1).
 .TP
-.B Mod1\-p
+.B Mod1\-d
 Spawn
-.BR dmenu(1)
+.BR rofi(1)
 for launching other programs.
 .TP
 .B Mod1\-,
@@ -80,28 +88,40 @@ Send focused window to next screen, if any.
 .B Mod1\-b
 Toggles bar on and off.
 .TP
-.B Mod1\-t
+.B Mod1\-Shift\-r
+Sets dwindle layout.
+.TP
+.B Mod1\-Shift\-t
 Sets tiled layout.
 .TP
-.B Mod1\-f
+.B Mod1\-Shift\-y
 Sets floating layout.
 .TP
-.B Mod1\-m
+.B Mod1\-Shift\-u
 Sets monocle layout.
 .TP
-.B Mod1\-space
-Toggles between current and previous layout.
+.B Mod1\-Shift\-i
+Sets spiral (fibonacci) layout.
 .TP
-.B Mod1\-j
+.B Mod1\-Shift\-o
+Sets centered master layout.
+.TP
+.B Mod1\-Shift\-p
+Sets centereded floating master layout.
+.TP
+.B Mod1\-space
+Swap esc and caps keys
+.TP
+.B Mod1\-j, Mod1\-Right, Mod1\-Shift\-Right
 Focus next window.
 .TP
-.B Mod1\-k
+.B Mod1\-k, Mod1\-Left, Mod1\-Shift\-Left
 Focus previous window.
 .TP
 .B Mod1\-i
 Increase number of windows in master area.
 .TP
-.B Mod1\-d
+.B Mod1\-b
 Decrease number of windows in master area.
 .TP
 .B Mod1\-l
@@ -110,7 +130,7 @@ Increase master area size.
 .B Mod1\-h
 Decrease master area size.
 .TP
-.B Mod1\-Return
+.B Mod1\-Shift\-Return
 Zooms/cycles focused window to/from master area (tiled layouts only).
 .TP
 .B Mod1\-Shift\-c
@@ -119,25 +139,25 @@ Close focused window.
 .B Mod1\-Shift\-space
 Toggle focused window between tiled and floating state.
 .TP
-.B Mod1\-Tab
+.B Mod1\-Shift\-Tab
 Toggles to the previously selected tags.
 .TP
-.B Mod1\-Shift\-[1..n]
+.B Mod1\-Shift\-[1..n] (AZERTY mode)
 Apply nth tag to focused window.
 .TP
-.B Mod1\-Shift\-0
+.B Mod1\-Shift\-0 (AZERTY mode)
 Apply all tags to focused window.
 .TP
-.B Mod1\-Control\-Shift\-[1..n]
+.B Mod1\-Control\-Shift\-[1..n] (AZERTY mode)
 Add/remove nth tag to/from focused window.
 .TP
-.B Mod1\-[1..n]
+.B Mod1\-[1..n] (AZERTY mode)
 View all windows with nth tag.
 .TP
-.B Mod1\-0
+.B Mod1\-0 (AZERTY mode)
 View all windows with any tag.
 .TP
-.B Mod1\-Control\-[1..n]
+.B Mod1\-Control\-[1..n] (AZERTY mode)
 Add/remove all windows with nth tag to/from the view.
 .TP
 .B Mod1\-Shift\-q
@@ -156,8 +176,9 @@ Resize focused window while dragging. Tiled windows will be toggled to the float
 dwm is customized by creating a custom config.h and (re)compiling the source
 code. This keeps it fast, secure and simple.
 .SH SEE ALSO
-.BR dmenu (1),
-.BR st (1)
+.BR rofi (1),
+.BR urxvtd (1)
+.BR urxvtc (1)
 .SH ISSUES
 Java applications which use the XToolkit/XAWT backend may draw grey windows
 only. The XToolkit/XAWT backend breaks ICCCM-compliance in recent JDK 1.5 and early
