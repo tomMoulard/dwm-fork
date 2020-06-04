@@ -46,3 +46,9 @@ Configuration
 -------------
 The configuration of dwm is done by creating a custom config.h
 and (re)compiling the source code.
+
+Documentation
+-------------
+After installing dwm, you have access to:
+    man dwm(1)
+
