@@ -118,7 +118,6 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
 	{ MODKEY,                       XK_Insert, spawn,          SHCMD("notify-send \"Clipboard contents:\" \"$(xclip -o -selection clipboard)\"") },
 	{ MODKEY|ShiftMask,             XK_b,      spawn,          SHCMD("shutdown now") },
-	{ MODKEY,                       XK_2,      spawn,          SHCMD("$BROWSER") },
 	{ MODKEY|ALTKEY,                XK_Right,  spawn,          SHCMD("xrandr --output $SCREEN --rotate right") },
 	{ MODKEY|ALTKEY,                XK_Left,   spawn,          SHCMD("xrandr --output $SCREEN --rotate left") },
 	{ MODKEY|ALTKEY,                XK_Up,     spawn,          SHCMD("xrandr --output $SCREEN --rotate normal") },
