@@ -29,6 +29,7 @@ static const Rule rules[] = {
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
+	{ "*otific*", NULL,       NULL,       0,            1,           -1 },
 	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
 };
 
@@ -70,6 +71,9 @@ static const char *dmenussh[] = { "rofi", "-show", "ssh", NULL };
 static const char *templatecmd[] = { "templates.sh", "$HOME/workspace/default_files", NULL };
 static const char *termcmd[]  = { "urxvtc", NULL };
 static const char *lockcmd[]  = { "lock.sh", NULL };
+
+/* For Keycodes, see xev */
+#include "/usr/include/X11/XF86keysym.h"
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -133,15 +137,12 @@ static Key keys[] = {
 	TAGKEYS(                        XK_ccedilla,               8)
 	{ MODKEY|ShiftMask,             XK_c,      quit,           {0} },
 	{ MODKEY|ShiftMask,             XK_q,      killclient,     {0} },
-
-//	{ 0, XF86XK_AudioMute,          spawn,      SHCMD("sound.sh toggle") },
-//	{ 0, XF86XK_AudioRaiseVolume,   spawn,      SHCMD("amixer -D pulse sset Master 5%+") },
-//	{ 0, XF86XK_AudioLowerVolume,   spawn,      SHCMD("amixer -D pulse sset Master 5%-") },
-//	{ 0, XF86XK_WWW,                spawn,      SHCMD("$BROWSER") },
-//	{ 0, XF86XK_DOS,                spawn,      {.v = termcmd } },
-//	{ 0, XF86XK_TouchpadToggle,     spawn,      SHCMD("(synclient | grep 'TouchpadOff.*1' && synclient TouchpadOff=0) || synclient TouchpadOff=1") },
-//	{ 0, XF86XK_TouchpadOff,        spawn,      SHCMD("synclient TouchpadOff=1") },
-//	{ 0, XF86XK_TouchpadOn,         spawn,      SHCMD("synclient TouchpadOff=0") },
+	{ 0, XF86XK_AudioLowerVolume,   spawn,      SHCMD("sound.sh down") },
+	{ 0, XF86XK_AudioMute,          spawn,      SHCMD("sound.sh toggle") },
+	{ 0, XF86XK_AudioRaiseVolume,   spawn,      SHCMD("sound.sh up") },
+	{ 0, XF86XK_MonBrightnessDown,  spawn,      SHCMD("brightness.sh down") },
+	{ 0, XF86XK_MonBrightnessUp,    spawn,      SHCMD("brightness.sh up") },
+	{ 0, XF86XK_AudioPlay,          spawn,      SHCMD("notify-send \"Sorry feature not used yet\" \"\"") },
 };
 
 /* button definitions */
