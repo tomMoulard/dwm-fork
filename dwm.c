@@ -119,7 +119,7 @@ struct Monitor {
 	int by;               /* bar geometry */
 	int mx, my, mw, mh;   /* screen size */
 	int wx, wy, ww, wh;   /* window area  */
-    int gappx;            /* gaps between windows */
+	int gappx;            /* gaps between windows */
 	unsigned int seltags;
 	unsigned int sellt;
 	unsigned int tagset[2];
@@ -200,7 +200,6 @@ static void sendmon(Client *c, Monitor *m);
 static void setclientstate(Client *c, long state);
 static void setfocus(Client *c);
 static void setfullscreen(Client *c, int fullscreen);
-static void setgaps(const Arg *arg);
 static void setlayout(const Arg *arg);
 static void setmfact(const Arg *arg);
 static void setup(void);
@@ -437,13 +436,13 @@ buttonpress(XEvent *e)
 	}
 	if (ev->window == selmon->barwin) {
 		i = x = 0;
-        unsigned int occ = 0;
-        for(c = m->clients; c; c = c->next)
-            occ |= c->tags;
+		unsigned int occ = 0;
+		for(c = m->clients; c; c = c->next)
+			occ |= c->tags;
 		do {
-            /* do not reserve space for vacant tags */
-            if(!(occ & 1 << i || m->tagset[m->seltags] & i << i))
-                continue;
+			/* do not reserve space for vacant tags */
+			if(!(occ & 1 << i || m->tagset[m->seltags] & i << i))
+				continue;
 			x += TEXTW(tags[i]);
 		} while (ev->x >= x && ++i < LENGTH(tags));
 		if (i < LENGTH(tags)) {
@@ -532,7 +531,7 @@ clientmessage(XEvent *e)
 	if (cme->message_type == netatom[NetWMState]) {
 		if (cme->data.l[1] == netatom[NetWMFullscreen]
 		|| cme->data.l[2] == netatom[NetWMFullscreen])
-			setfullscreen(c, (cme->data.l[0] == 1 /* _NET_WM_STATE_ADD    */
+			setfullscreen(c, (cme->data.l[0] == 1 /* _NET_WM_STATE_ADD */
 				|| (cme->data.l[0] == 2 /* _NET_WM_STATE_TOGGLE */ && !c->isfullscreen)));
 	} else if (cme->message_type == netatom[NetActiveWindow]) {
 		if (c != selmon->sel && !c->isurgent)
@@ -727,9 +726,9 @@ drawbar(Monitor *m)
 	}
 	x = 0;
 	for (i = 0; i < LENGTH(tags); i++) {
-        /* do not draw vacant tags */
-        if(!(occ & 1 << i || m->tagset[m->seltags] & 1 << i))
-            continue;
+		/* do not draw vacant tags */
+		if(!(occ & 1 << i || m->tagset[m->seltags] & 1 << i))
+			continue;
 		w = TEXTW(tags[i]);
 		drw_setscheme(drw, scheme[m->tagset[m->seltags] & 1 << i ? SchemeSel : SchemeNorm]);
 		drw_text(drw, x, 0, w, bh, lrpad / 2, tags[i], urg & 1 << i);
@@ -1535,16 +1534,6 @@ setfullscreen(Client *c, int fullscreen)
 }
 
 void
-setgaps(const Arg *arg)
-{
-   if ((arg->i == 0) || (selmon->gappx + arg->i < 0))
-       selmon->gappx = 0;
-   else
-       selmon->gappx += arg->i;
-   arrange(selmon);
-}
-
-void
 setlayout(const Arg *arg)
 {
 	if (!arg || !arg->v || arg->v != selmon->lt[selmon->sellt])
@@ -1733,13 +1722,13 @@ tile(Monitor *m)
 		mw = m->ww - m->gappx;
 	for (i = 0, my = ty = m->gappx, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++)
 		if (i < m->nmaster) {
-           h = (m->wh - my) / (MIN(n, m->nmaster) - i) - m->gappx;
-           resize(c, m->wx + m->gappx, m->wy + my, mw - (2*c->bw) - m->gappx, h - (2*c->bw), 0);
-           my += HEIGHT(c) + m->gappx;
+			h = (m->wh - my) / (MIN(n, m->nmaster) - i) - m->gappx;
+			resize(c, m->wx + m->gappx, m->wy + my, mw - (2*c->bw) - m->gappx, h - (2*c->bw), 0);
+			my += HEIGHT(c) + m->gappx;
 		} else {
-           h = (m->wh - ty) / (n - i) - m->gappx;
-           resize(c, m->wx + mw + m->gappx, m->wy + ty, m->ww - mw - (2*c->bw) - 2*m->gappx, h - (2*c->bw), 0);
-           ty += HEIGHT(c) + m->gappx;
+			h = (m->wh - ty) / (n - i) - m->gappx;
+			resize(c, m->wx + mw + m->gappx, m->wy + ty, m->ww - mw - (2*c->bw) - 2*m->gappx, h - (2*c->bw), 0);
+			ty += HEIGHT(c) + m->gappx;
 		}
 }
 
@@ -1769,8 +1758,8 @@ togglefloating(const Arg *arg)
 void
 togglefullscr(const Arg *arg)
 {
-    if(selmon->sel)
-        setfullscreen(selmon->sel, !selmon->sel->isfullscreen);
+	if(selmon->sel)
+		setfullscreen(selmon->sel, !selmon->sel->isfullscreen);
 }
 
 void
@@ -2100,17 +2089,17 @@ view(const Arg *arg)
 
 void
 shiftview(const Arg *arg) {
-    Arg shifted;
+	Arg shifted;
 
-    if(arg->i > 0) // left circular shift
-        shifted.ui = (selmon->tagset[selmon->seltags] << arg->i)
-           | (selmon->tagset[selmon->seltags] >> (LENGTH(tags) - arg->i));
+	if(arg->i > 0) // left circular shift
+		shifted.ui = (selmon->tagset[selmon->seltags] << arg->i)
+			| (selmon->tagset[selmon->seltags] >> (LENGTH(tags) - arg->i));
 
-    else // right circular shift
-        shifted.ui = selmon->tagset[selmon->seltags] >> (- arg->i)
-           | selmon->tagset[selmon->seltags] << (LENGTH(tags) + arg->i);
+	else // right circular shift
+		shifted.ui = selmon->tagset[selmon->seltags] >> (- arg->i)
+			| selmon->tagset[selmon->seltags] << (LENGTH(tags) + arg->i);
 
-    view(&shifted);
+	view(&shifted);
 }
 
 Client *
@@ -2230,19 +2219,19 @@ centeredmaster(Monitor *m)
 		 * of the screen */
 		h = (m->wh - my) / (MIN(n, m->nmaster) - i);
 		resize(c, m->wx + mx, m->wy + my, mw - (2*c->bw),
-		       h - (2*c->bw), 0);
+			h - (2*c->bw), 0);
 		my += HEIGHT(c);
 	} else {
 		/* stack clients are stacked vertically */
 		if ((i - m->nmaster) % 2 ) {
 			h = (m->wh - ety) / ( (1 + n - i) / 2);
 			resize(c, m->wx, m->wy + ety, tw - (2*c->bw),
-			       h - (2*c->bw), 0);
+				h - (2*c->bw), 0);
 			ety += HEIGHT(c);
 		} else {
 			h = (m->wh - oty) / ((1 + n - i) / 2);
 			resize(c, m->wx + mx + mw, m->wy + oty,
-			       tw - (2*c->bw), h - (2*c->bw), 0);
+				tw - (2*c->bw), h - (2*c->bw), 0);
 			oty += HEIGHT(c);
 		}
 	}
@@ -2285,13 +2274,13 @@ centeredfloatingmaster(Monitor *m)
 		 * of the screen */
 		w = (mw + mxo - mx) / (MIN(n, m->nmaster) - i);
 		resize(c, m->wx + mx, m->wy + my, w - (2*c->bw),
-		       mh - (2*c->bw), 0);
+			   mh - (2*c->bw), 0);
 		mx += WIDTH(c);
 	} else {
 		/* stack clients are stacked horizontally */
 		w = (m->ww - tx) / (n - i);
 		resize(c, m->wx + tx, m->wy, w - (2*c->bw),
-		       m->wh - (2*c->bw), 0);
+			   m->wh - (2*c->bw), 0);
 		tx += WIDTH(c);
 	}
 }
