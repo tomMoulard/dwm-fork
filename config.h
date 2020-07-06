@@ -27,10 +27,14 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "*otific*", NULL,       NULL,       0,            1,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+	/* class                       instance    title       tags mask     isfloating   monitor */
+	// { "Gimp",                   NULL,       NULL,       0,            1,           -1 },
+	{ "Microsoft Teams - Preview", NULL,       NULL,       0,            1,           -1 },
+	{ "Firefox",                   NULL,       NULL,       1 << 8,       0,           -1 },
+	// WM_CLASS(STRING) = "microsoft teams - preview", "Microsoft Teams - Preview"
+	// WM_CLASS(STRING) = "gimp-2.10", "Gimp-2.10"
+	// WM_CLASS(STRING) = "Mail", "Thunderbird"
+	// WM_CLASS(STRING) = "google-chrome", "Google-chrome"
 };
 
 /* layout(s) */
@@ -107,6 +111,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_p,      setlayout,      {.v = &layouts[6]} },
 	{ MODKEY,                       XK_f,      togglefullscr,  {0} },
 	{ MODKEY,                       XK_space,  spawn,          SHCMD("xmodmap ~/.Xmodmap") },
+	{ MODKEY,                       XK_e,      spawn,          SHCMD("nautilus") },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY|ShiftMask,             XK_Print,  spawn,          SHCMD("screenshot.sh --select") },
 	{ MODKEY,                       XK_Print,  spawn,          SHCMD("screenshot.sh --full") },
@@ -122,9 +127,6 @@ static Key keys[] = {
 	{ MODKEY|ALTKEY,                XK_Left,   spawn,          SHCMD("xrandr --output $SCREEN --rotate left") },
 	{ MODKEY|ALTKEY,                XK_Up,     spawn,          SHCMD("xrandr --output $SCREEN --rotate normal") },
 	{ MODKEY|ALTKEY,                XK_Down,   spawn,          SHCMD("xrandr --output $SCREEN --rotate inverted") },
-	{ MODKEY|ShiftMask,             XK_minus,  setgaps,        {.i = -1 } },
-	{ MODKEY|ShiftMask,             XK_equal,  setgaps,        {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_equal,  setgaps,        {.i = 0  } },
 	TAGKEYS(                        XK_ampersand,              0)
 	TAGKEYS(                        XK_eacute,                 1)
 	TAGKEYS(                        XK_quotedbl,               2)
@@ -141,7 +143,7 @@ static Key keys[] = {
 	{ 0, XF86XK_AudioRaiseVolume,   spawn,      SHCMD("sound.sh up") },
 	{ 0, XF86XK_MonBrightnessDown,  spawn,      SHCMD("brightness.sh down") },
 	{ 0, XF86XK_MonBrightnessUp,    spawn,      SHCMD("brightness.sh up") },
-	{ 0, XF86XK_AudioPlay,          spawn,      SHCMD("notify-send \"Sorry feature not used yet\" \"\"") },
+	{ 0, XF86XK_AudioPlay,          spawn,      SHCMD("FILE=$(mktemp) && xprop WM_CLASS > $FILE && notify-send \"$(cat $FILE)\" \"See $FILE\"") },
 };
 
 /* button definitions */
