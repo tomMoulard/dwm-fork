@@ -38,6 +38,15 @@ static const Rule rules[] = {
 	// WM_CLASS(STRING) = "google-chrome", "Google-chrome"
 };
 
+// Autostart applications
+static const char *const autostart[] = {
+	"dunst", NULL,
+	"status.sh", NULL,
+	"xmodmap", "${HOME}/.Xmodmap", NULL,
+	"${HOME  }/.xinitrc", NULL,
+	NULL /* terminate */
+};
+
 /* layout(s) */
 static const float mfact     = 0.5; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;   /* number of clients in master area */
