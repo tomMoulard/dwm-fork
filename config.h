@@ -20,7 +20,7 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9 - test" };
+static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -28,9 +28,10 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class                       instance    title       tags mask     isfloating   monitor */
-	// { "Gimp",                   NULL,       NULL,       0,            1,           -1 },
 	{ "Microsoft Teams - Preview", NULL,       NULL,       0,            1,           -1 },
-	{ "Firefox",                   NULL,       NULL,       1 << 8,       0,           -1 },
+	{ "Display-im6.q16",           NULL,       NULL,       0,            1,           -1 },
+	// { "Gimp",                   NULL,       NULL,       0,            1,           -1 },
+	// { "Firefox",                   NULL,       NULL,       1 << 8,       0,           -1 },
 	// WM_CLASS(STRING) = "microsoft teams - preview", "Microsoft Teams - Preview"
 	// WM_CLASS(STRING) = "gimp-2.10", "Gimp-2.10"
 	// WM_CLASS(STRING) = "Mail", "Thunderbird"
@@ -70,9 +71,9 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "rofi", "-show-icons", "-modi", "combi", "-show", "combi", "-combi-modi", "drun,run", NULL };
+static const char *dmenucmd[] = { "rofi", "-show", "combi", NULL };
 static const char *dmenussh[] = { "rofi", "-show", "ssh", NULL };
-static const char *templatecmd[] = { "templates.sh", "$HOME/workspace/default_files", NULL };
+static const char *templatecmd[] = { "templates.sh", "${HOME}/workspace/default_files", NULL };
 static const char *termcmd[]  = { "urxvtc", NULL };
 static const char *lockcmd[]  = { "lock.sh", NULL };
 
