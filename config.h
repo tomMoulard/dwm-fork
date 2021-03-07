@@ -40,10 +40,11 @@ static const Rule rules[] = {
 
 // Autostart applications
 static const char *const autostart[] = {
-	"dunst", NULL,
-	"status.sh", NULL,
-	"xmodmap", "${HOME}/.Xmodmap", NULL,
-	"${HOME  }/.xinitrc", NULL,
+	"status.sh", NULL,                         /* status script */
+	"/home/tm/.xinitrc", NULL,                 /* startup script */
+	"/usr/bin/urxvtd", "-q", "-f", "-o", NULL, /* urxvt daemon */
+	"/usr/bin/bluetoothctl", NULL,             /* Bluetooth */
+	"/usr/bin/compton", NULL,                  /* Compton: terminal transparency */
 	NULL /* terminate */
 };
 
