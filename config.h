@@ -45,6 +45,7 @@ static const char *const autostart[] = {
 	"/usr/bin/bluetoothctl", NULL,             /* Bluetooth */
 	"/usr/bin/compton", NULL,                  /* Compton: terminal transparency */
 	"/usr/bin/urxvtd", "-q", "-f", "-o", NULL, /* urxvt daemon */
+	"compton", NULL,                           /* compton: transparent windows */
 	"dunst", NULL,                             /* dunst: notifications */
 	"status.sh", NULL,                         /* status script */
 	"xmodmap", "${HOME}/.Xmodmap", NULL,
