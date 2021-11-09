@@ -31,12 +31,7 @@ static const Rule rules[] = {
 	{ "Microsoft Teams - Preview", NULL,       NULL,       0,            1,           -1 },
 	{ "Display-im6.q16",           NULL,       NULL,       0,            1,           -1 },
 	{ "Pavucontrol",               NULL,       NULL,       0,            1,           -1 },
-	// { "Gimp",                   NULL,       NULL,       0,            1,           -1 },
 	// { "Firefox",                   NULL,       NULL,       1 << 8,       0,           -1 },
-	// WM_CLASS(STRING) = "microsoft teams - preview", "Microsoft Teams - Preview"
-	// WM_CLASS(STRING) = "gimp-2.10", "Gimp-2.10"
-	// WM_CLASS(STRING) = "Mail", "Thunderbird"
-	// WM_CLASS(STRING) = "google-chrome", "Google-chrome"
 };
 
 // Autostart applications
