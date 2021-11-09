@@ -30,6 +30,7 @@ static const Rule rules[] = {
 	/* class                       instance    title       tags mask     isfloating   monitor */
 	{ "Microsoft Teams - Preview", NULL,       NULL,       0,            1,           -1 },
 	{ "Display-im6.q16",           NULL,       NULL,       0,            1,           -1 },
+	{ "Pavucontrol",               NULL,       NULL,       0,            1,           -1 },
 	// { "Gimp",                   NULL,       NULL,       0,            1,           -1 },
 	// { "Firefox",                   NULL,       NULL,       1 << 8,       0,           -1 },
 	// WM_CLASS(STRING) = "microsoft teams - preview", "Microsoft Teams - Preview"
