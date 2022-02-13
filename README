@@ -21,6 +21,9 @@ necessary as root):
 
     make clean install
 
+If run with sudo, do not forget to preserve env:
+
+    sudo -E clean install
 
 Running dwm
 -----------
