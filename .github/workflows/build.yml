@@ -12,6 +12,11 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - uses: awalsh128/cache-apt-pkgs-action@v1
+      with:
+        packages: gcc libx11-dev libxft-dev libxinerama-dev dbus-x11
+        version: 1.0
+
     - uses: ammaraskar/gcc-problem-matcher@master
 
     - name: make
