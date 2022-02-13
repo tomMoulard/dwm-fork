@@ -1,0 +1,39 @@
+name: documentation publish
+
+on:
+  push:
+    # paths:
+      # - 'dwm.1'
+    branches:
+      - master
+
+jobs:
+  build-doc:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - uses: awalsh128/cache-apt-pkgs-action@v1
+      with:
+        packages: pandoc
+        version: pandoc-1.0
+
+    - name: Change doc version
+      run: |
+        export VERSION="$(cat config.mk | grep 'VERSION = ' | cut -d ' ' -f 3)"
+        sed -i "s/VERSION/${VERSION}/g" dwm.1
+        mkdir -p docs
+
+    - uses: docker://pandoc/latex:2.9
+      with:
+        args: --output=docs/index.html dwm.1
+
+    - name: Publish generated content to GitHub Pages
+      uses: tsunematsu21/actions-publish-gh-pages@v1.0.2
+      with:
+        dir: docs/
+        branch: gh-pages
+        token: ${{ secrets.ACCESS_TOKEN }}
+
