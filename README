@@ -48,6 +48,21 @@ like this in your .xinitrc:
     exec dwm
 
 
+Testing dwm
+-----------
+
+Using Xephyr to create a virtual display:
+
+    Xephyr -br -ac -noreset -screen 800x600 :1
+
+(use sudo to capture user input)
+
+Use the DISPLAY environment variable to connect to the display and run dwm on
+it:
+
+    DISPLAY=:1 dwm
+
+
 Configuration
 -------------
 The configuration of dwm is done by creating a custom config.h
