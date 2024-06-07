@@ -5,6 +5,7 @@ include config.mk
 
 SRC = drw.c dwm.c util.c
 OBJ = ${SRC:.c=.o}
+PWD = $(shell pwd)
 
 all: options dwm dwm.sh
 
