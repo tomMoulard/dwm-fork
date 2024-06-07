@@ -26,24 +26,24 @@ static const Rule rules[] = {
 	/* xprop(1):
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
-	 */
+	*/
 	/* class                       instance    title       tags mask     isfloating   monitor */
 	{ "Microsoft Teams - Preview", NULL,       NULL,       0,            1,           -1 },
 	{ "Display-im6.q16",           NULL,       NULL,       0,            1,           -1 },
-	{ "Pavucontrol",               NULL,       NULL,       0,            1,           -1 },
+	// { "Pavucontrol",               NULL,       NULL,       0,            1,           -1 },
 	// { "Firefox",                   NULL,       NULL,       1 << 8,       0,           -1 },
 };
 
 // Autostart applications
 static const char *const autostart[] = {
-	"${HOME}/.xinitrc", NULL,                  /* startup script */
+	"/home/tm/.xinitrc", NULL,                 /* startup script */
 	"/usr/bin/bluetoothctl", NULL,             /* Bluetooth */
 	"/usr/bin/compton", NULL,                  /* Compton: terminal transparency */
 	"/usr/bin/urxvtd", "-q", "-f", "-o", NULL, /* urxvt daemon */
 	"compton", NULL,                           /* compton: transparent windows */
 	"dunst", NULL,                             /* dunst: notifications */
 	"status.sh", NULL,                         /* status script */
-	"xmodmap", "${HOME}/.Xmodmap", NULL,
+	"xmodmap", "/home/tm/.Xmodmap", NULL,
 	NULL /* terminate */
 };
 
@@ -82,7 +82,7 @@ static const Layout layouts[] = {
 /* commands */
 static const char *dmenucmd[] = { "rofi", "-show", "combi", NULL };
 static const char *dmenussh[] = { "rofi", "-show", "ssh", NULL };
-static const char *templatecmd[] = { "templates.sh", "${HOME}/workspace/default_files", NULL };
+static const char *templatecmd[] = { "templates.sh", "/home/tm/workspace/default_files", NULL };
 static const char *termcmd[]  = { "urxvtc", NULL };
 static const char *lockcmd[]  = { "lock.sh", NULL };
 
@@ -137,6 +137,7 @@ static Key keys[] = {
 	{ MODKEY|ALTKEY,                XK_Left,   spawn,          SHCMD("xrandr --output $SCREEN --rotate left") },
 	{ MODKEY|ALTKEY,                XK_Up,     spawn,          SHCMD("xrandr --output $SCREEN --rotate normal") },
 	{ MODKEY|ALTKEY,                XK_Down,   spawn,          SHCMD("xrandr --output $SCREEN --rotate inverted") },
+	{ MODKEY,                       XK_m,      spawn,          SHCMD("sound.sh toggle-mic") },
 	TAGKEYS(                        XK_ampersand,              0)
 	TAGKEYS(                        XK_eacute,                 1)
 	TAGKEYS(                        XK_quotedbl,               2)
@@ -149,11 +150,15 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_c,      quit,           {0} },
 	{ MODKEY|ShiftMask,             XK_q,      killclient,     {0} },
 	{ 0, XF86XK_AudioLowerVolume,   spawn,      SHCMD("sound.sh down") },
+	{ 0, XF86XK_AudioMicMute,       spawn,      SHCMD("sound.sh toggle-mic")},
 	{ 0, XF86XK_AudioMute,          spawn,      SHCMD("sound.sh toggle") },
+	{ 0, XF86XK_AudioPlay,          spawn,      SHCMD("FILE=$(mktemp) && xprop WM_CLASS > $FILE && notify-send \"$(cat $FILE)\" \"See $FILE\"") },
 	{ 0, XF86XK_AudioRaiseVolume,   spawn,      SHCMD("sound.sh up") },
+	{ 0, XF86XK_Explorer,           spawn,      SHCMD("nautilus") },
+	{ 0, XF86XK_Mail,               spawn,      SHCMD("thunderbird") },
 	{ 0, XF86XK_MonBrightnessDown,  spawn,      SHCMD("brightness.sh down") },
 	{ 0, XF86XK_MonBrightnessUp,    spawn,      SHCMD("brightness.sh up") },
-	{ 0, XF86XK_AudioPlay,          spawn,      SHCMD("FILE=$(mktemp) && xprop WM_CLASS > $FILE && notify-send \"$(cat $FILE)\" \"See $FILE\"") },
+	{ 0, XF86XK_Search,             spawn,      {.v = dmenucmd}},
 };
 
 /* button definitions */
